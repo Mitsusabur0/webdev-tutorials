@@ -1,0 +1,19 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: 100px 100px;
+}
+.grid-container2 {
+    display: grid;
+    grid-template-columns: 100px 100px 200px;
+    margin-top: 50px;
+}
+.grid-container3 {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    margin-top: 50px;
+}
+.grid-container4 {
+    display: grid;
+    grid-template-columns: 100px 1fr 2fr;
+    margin-top: 50px;
+}

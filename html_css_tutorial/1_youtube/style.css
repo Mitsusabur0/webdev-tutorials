@@ -1,5 +1,11 @@
 body {
-    background-color: grey;
+    /* background-color: grey; */
+    font-family: Roboto;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
 }
 
 .thumbnail {
@@ -22,16 +28,41 @@ body {
     margin-right: 20px;
 }
 
+.video-info-grid {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+}
+
 .channel-picture {
-    display: inline-block;
-    width: 80px;
 }
 
 .channel-picture img {
-    width: inherit;
+    width: 80%;
+    border-radius: 90px;
 }
 
 .video-info {
-    display: inline-block;
-    width: 300px;
+}
+
+.video-title {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 30px;
+}
+
+.video-author {
+    font-size: 16px;
+    color: #303030;
+    margin-bottom: 4px;
+}
+
+.video-stats {
+    font-size: 16px;
+    color: #303030;
+}
+
+.thumbnail-row {
+    margin-bottom: 14px;
 }
