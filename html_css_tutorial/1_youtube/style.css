@@ -1,0 +1,37 @@
+body {
+    background-color: grey;
+}
+
+.thumbnail {
+    display: block;
+    width: 400px;
+    height: 220px;
+    object-fit: cover;
+}
+
+.search-bar {
+    margin-bottom: 20px;
+    display: block;
+}
+
+.video-preview {
+    width: 400px;
+    vertical-align: top;
+    /* border: 1px solid black; */
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.channel-picture {
+    display: inline-block;
+    width: 80px;
+}
+
+.channel-picture img {
+    width: inherit;
+}
+
+.video-info {
+    display: inline-block;
+    width: 300px;
+}
