@@ -1,22 +1,15 @@
-body {
-    /* background-color: grey; */
-    font-family: Roboto;
-    padding-right: 20px;
-    padding-left: 20px;
-}
 
-p {
-    margin-top: 0;
-    margin-bottom: 0;
+.video-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    row-gap: 40px;
+    column-gap: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .thumbnail {
     width: 100%;
-}
-
-.search-bar {
-    margin-bottom: 20px;
-    display: block;
 }
 
 .video-info-grid {
@@ -53,9 +46,3 @@ p {
 }
 
 
-.video-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    row-gap: 40px;
-    column-gap: 30px;
-}
