@@ -1,0 +1,102 @@
+.header-container {
+    display: flex;
+    height: 80px;
+    justify-content: space-between;
+    padding: 0 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid lightgrey;
+    background-color: white;
+    z-index: 999;
+}
+
+/* LEFT SECTION */
+.left-section {
+    display: flex;
+    align-items: center;
+    width: 20vw;
+    gap: 30px;
+    justify-content: start;
+}
+
+.left-section img {
+    height: 30px;
+}
+
+#yt-logo {
+    height: 25px;
+}
+
+
+
+/* MIDDLE SECTION */
+.middle-section {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    padding: 0 10px;
+    justify-content: center;
+    gap: 20px;
+}
+
+.search-bar {
+    width: 60%;
+    display: flex;
+}
+
+.search-field {
+    height: 40px;
+    border: 1px solid lightgrey;
+    padding-left: 20px;
+    border-radius: 90px 0 0 90px;
+    font-size: 1rem;
+    outline: none;
+    flex-grow: 1;
+}
+
+.search-field:focus {
+    border: 1px solid rgb(0, 110, 255);
+}
+
+.search-button {
+    width: 60px;
+    height: 40px;
+    border: 1px solid lightgrey;
+    border-left: none;
+    border-radius: 0 90px 90px 0;
+}
+
+.search-button img {
+    height: 30px;
+}
+
+.voice-search {
+    height: 40px;
+    background-color: rgb(226, 226, 226);
+    padding: 5px;
+    border-radius: 20px;
+}
+
+
+
+
+
+/* RIGHT SECTION */
+.right-section {
+    display: flex;
+    align-items: center;
+    width: 20vw;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.right-section img {
+    height: 30px;
+}
+
+#my-channel-icon {
+    height: 40px;
+    margin-left: 10px;
+}
