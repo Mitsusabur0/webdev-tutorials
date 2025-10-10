@@ -43,6 +43,16 @@
 
 .thumbnail-row {
     margin-bottom: 14px;
+    position: relative;
 }
 
-
+.video-length {
+    position: absolute;
+    color: white;
+    bottom: 10px;
+    right: 10px;
+    background-color: black;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-size: 14px;
+}
