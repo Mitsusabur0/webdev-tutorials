@@ -100,3 +100,28 @@
     height: 40px;
     margin-left: 10px;
 }
+
+
+
+
+
+/* TOOLTIPS */
+
+
+.search-button:hover .tooltip,
+.upload-button:hover .tooltip,
+.yt-apps-button:hover .tooltip,
+.notifications-button:hover .tooltip,
+.my-channel-button:hover .tooltip {
+    opacity: 1;
+}
+
+
+.search-button .tooltip,
+.upload-button .tooltip,
+.yt-apps-button .tooltip,
+.notifications-button .tooltip,
+.my-channel-button .tooltip {
+    bottom: -30px;
+}
+

@@ -15,3 +15,26 @@ body {
     margin-left: 150px;
 }   
 
+.relative {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+.tooltip {
+    position: absolute;
+    background-color: rgb(97, 97, 97);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+
+
+
