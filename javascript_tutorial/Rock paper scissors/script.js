@@ -7,13 +7,15 @@ const winningMoves = {
 
 
 const choicesDisplay = document.querySelector(".choices-display")
-// const computerChoiceDisplay = document.querySelector(".computer-choice")
 const result = document.querySelector(".result")
-let winCounter = 0;
-let loseCounter = 0;
 const winDisplay = document.querySelector(".win-display")
 const loseDisplay = document.querySelector(".lose-display")
-
+const tieDisplay = document.querySelector(".tie-display")
+const score = {
+    wins: 0,
+    loses: 0,
+    ties: 0,
+}
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -26,31 +28,38 @@ async function runGame(myChoice) {
     
     choicesDisplay.innerHTML = `${myChoice} vs ...`;
 
-    await delay(1000);
     const computerChoice = choices[Math.floor(Math.random() * choices.length)];
     choicesDisplay.innerHTML = `${myChoice} vs ${computerChoice}`;
 
 
-    await delay(1000);
     if (myChoice === computerChoice) {
-        result.style.color = 'black';
+        result.style.color = 'darkblue';
         result.innerHTML = "Result: Tie";
-
+        score.ties++;
+        tieDisplay.innerHTML = `Ties: ${score.ties}`;
     } else if (winningMoves[myChoice] === computerChoice) {
         result.style.color = 'darkgreen';
         result.innerHTML = "Result: YOU WIN"
-        winCounter++;
-        // await delay(500);
-        winDisplay.innerHTML = `Wins: ${winCounter}`;
+        score.wins++;
+        winDisplay.innerHTML = `Wins: ${score.wins}`;
     } else {
         result.style.color = 'darkred';
         result.innerHTML = "Result: YOU LOSE"
-        loseCounter++;
-        // await delay(500);
-        loseDisplay.innerHTML = `Loses: ${loseCounter}`
+        score.loses++;
+        loseDisplay.innerHTML = `Loses: ${score.loses}`
     }
 
 }
 
 
-
+function resetScore() {
+    score.loses = 0;
+    score.wins = 0;
+    score.ties = 0;
+    loseDisplay.innerHTML = `Loses: 0`
+    winDisplay.innerHTML = `Wins: 0`;
+    tieDisplay.innerHTML = `Ties: 0`;
+    result.innerHTML = "Result:"
+    result.style.color = 'black';
+    choicesDisplay.innerHTML = ``;
+}
