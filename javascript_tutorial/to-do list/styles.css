@@ -6,17 +6,17 @@ p, button {
     font-size: 1rem;
 }
 
-
 body {
     background-color: grey;
-    padding: 10px;
+    padding: 30px;
 }
 
 .grid-container {
     display: grid;
     grid-template-columns: 3fr 2fr 2fr;
     gap: 10px;
-    width: 70vw;
+    margin-bottom: 20px;
+    min-height: 40px;
 }
 
 .grid-container input {
@@ -24,20 +24,24 @@ body {
     border-radius: 4px;
     border: none;
     font-size: 1rem;
+    min-width: 10px;
+}
+
+.grid-container button {
+    color: white;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
 }
 
 .btn-add {
     background-color: green;
-    color: white;
-    border: none;
-    font-size: 1rem;
+
 }
 
 .btn-delete {
     background-color: rgb(112, 30, 30);
-    color: white;
 }
-
 
 .list-row {
     display: grid;
