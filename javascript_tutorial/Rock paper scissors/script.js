@@ -1,10 +1,10 @@
 const choices = ['rock', 'paper', 'scissors'];
+
 const winningMoves = {
     rock: 'scissors',
     paper: 'rock',
     scissors: 'paper'
 };
-
 
 let score = JSON.parse(localStorage.getItem('score')) || {
     wins: 0,
@@ -17,36 +17,40 @@ const result = document.querySelector(".result")
 const winDisplay = document.querySelector(".win-display")
 const loseDisplay = document.querySelector(".lose-display")
 const tieDisplay = document.querySelector(".tie-display")
-
+const gameButtons = document.querySelectorAll(".btn-run-game");
+const resetButton = document.querySelector(".btn-reset-score");
 updateScore()
 
 
+gameButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        runGame(button.dataset.decision)
+    })
+})
+
+resetButton.addEventListener('click', () => {
+    resetScore();
+})
+
 function runGame(myChoice) {
-    result.style.color = 'black';
     result.innerHTML = "Result:";
-    
 
     const computerChoice = choices[Math.floor(Math.random() * choices.length)];
-    choicesDisplay.innerHTML = `${myChoice} vs ${computerChoice}`;
-
+    choicesDisplay.textContent = `${myChoice} vs ${computerChoice}`;
 
     if (myChoice === computerChoice) {
-        result.style.color = 'darkblue';
-        result.innerHTML = "Result: Tie";
+        result.textContent = "Result: Tie";
         score.ties++;
         updateScore()
     } else if (winningMoves[myChoice] === computerChoice) {
-        result.style.color = 'darkgreen';
-        result.innerHTML = "Result: YOU WIN"
+        result.textContent = "Result: YOU WIN"
         score.wins++;
         updateScore()
     } else {
-        result.style.color = 'darkred';
-        result.innerHTML = "Result: YOU LOSE"
+        result.textContent = "Result: YOU LOSE"
         score.loses++;
         updateScore()
     }
-
     localStorage.setItem('score', JSON.stringify(score));
     console.log(localStorage.getItem('score'))
 }
@@ -55,15 +59,14 @@ function runGame(myChoice) {
 function resetScore() {
     [score.loses, score.wins, score.ties] = [0, 0, 0];
     updateScore();
-    result.innerHTML = "Result:"
-    result.style.color = 'black';
-    choicesDisplay.innerHTML = "? vs ?";
+    result.textContent = "Result:"
+    choicesDisplay.textContent = "? vs ?";
     localStorage.removeItem('score');
     console.log(localStorage.getItem('score'))
 }
 
 function updateScore() {
-    winDisplay.innerHTML = `Wins: ${score.wins}`
-    loseDisplay.innerHTML = `Loses: ${score.loses}`
-    tieDisplay.innerHTML = `Ties: ${score.ties}`
+    winDisplay.textContent = `Wins: ${score.wins}`
+    loseDisplay.textContent = `Loses: ${score.loses}`
+    tieDisplay.textContent = `Ties: ${score.ties}`
 }

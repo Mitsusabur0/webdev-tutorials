@@ -1,7 +1,8 @@
 body {
-    background-color: grey;
+    background-color: black;
     padding: 50px;
-    
+    font-family: Arial;
+    color: white;
 }
 
 .green {
@@ -13,5 +14,22 @@ body {
 }
 
 .blue {
-    color: darkblue;
+    color: rgb(0, 97, 129);
+}
+
+.btn-choice {
+    padding: 40px;
+    border-radius: 90px;
+    border: 3px solid white;
+    cursor: pointer;
+    background-color: transparent;
+
+}
+
+.btn-choice:hover {
+    background-color: grey;
+}
+
+.btn-choice img {
+    width: 50px;
 }
