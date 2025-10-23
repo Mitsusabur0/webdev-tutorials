@@ -11,32 +11,33 @@ buttonAdd.addEventListener('click', () => {
         name: inputElement.value,
         date: inputDate.value,
     })
-    console.log(todoList)
+    // console.log(todoList)
     createList();
     inputElement.value = '';
 })
 
 function createList() {
     listContainer.innerHTML = '';
-    for (let i = 0; i < todoList.length; i++) {
+    todoList.forEach((task, i) => {
         let newContainer = document.createElement('div');
-        let newTask = document.createElement('p');
-        let newDate = document.createElement('p');
-        let buttonDelete = document.createElement('button');
+        let newTask = document.createElement('p')
+        let newDate = document.createElement('p')
+        let newBtnDelete = document.createElement('button')
 
         newContainer.classList.add('grid-container');
-        newTask.textContent = todoList[i]['name'];
-        newDate.textContent = todoList[i]['date'];
-        buttonDelete.textContent = 'Delete'
-        buttonDelete.classList.add('btn-delete');
-        buttonDelete.addEventListener('click', () => {
-            console.log(todoList[i])
-            todoList.splice(i, 1)
+        newTask.textContent = task['name'];
+        newDate.textContent = task['date'];
+        newBtnDelete.textContent = 'Delete';
+        newBtnDelete.classList.add('btn-delete');
+        newBtnDelete.addEventListener('click', () => {
+            todoList.splice(i, 1);
         })
 
-        newContainer.append(newTask, newDate, buttonDelete);
+        newContainer.append(newTask, newDate, newBtnDelete);
         listContainer.append(newContainer);
-    }
+
+
+    })
 }
 
 listContainer.addEventListener('click', (event) => {

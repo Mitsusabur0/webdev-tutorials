@@ -1,0 +1,40 @@
+body {
+    background-color: black;
+    padding: 50px;
+    font-family: Arial;
+    color: white;
+}
+
+.green {
+    color: darkgreen
+}
+
+.red {
+    color: darkred;
+}
+
+.blue {
+    color: rgb(0, 97, 129);
+}
+
+.btn-choice {
+    padding: 40px;
+    border-radius: 90px;
+    border: 3px solid white;
+    cursor: pointer;
+    background-color: transparent;
+
+}
+
+.btn-choice:hover {
+    background-color: grey;
+}
+
+.btn-choice img {
+    width: 50px;
+}
+
+.btn {
+    padding: 6px 12px;
+    font-size: 1rem;
+}

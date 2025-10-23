@@ -5,19 +5,13 @@ const winningMoves = {
     paper: 'rock',
     scissors: 'paper'
 };
-const keydownActions = {
-    'q': () => runGame('rock'),
-    'w': () => runGame('paper'),
-    'e': () => runGame('scissors'),
-    'a': resetScore
-}
-
 
 let score = JSON.parse(localStorage.getItem('score')) || {
     wins: 0,
     loses: 0,
     ties: 0,
 };
+let interval;
 
 const choicesDisplay = document.querySelector(".choices-display")
 const result = document.querySelector(".result")
@@ -26,7 +20,7 @@ const loseDisplay = document.querySelector(".lose-display")
 const tieDisplay = document.querySelector(".tie-display")
 const gameButtons = document.querySelectorAll(".btn-run-game");
 const resetButton = document.querySelector(".btn-reset-score");
-const body = document.querySelector("body");
+const autoPlayButton = document.querySelector('.btn-autoplay');
 updateScore()
 
 
@@ -39,6 +33,20 @@ gameButtons.forEach(button => {
 resetButton.addEventListener('click', () => {
     resetScore();
 })
+
+autoPlayButton.addEventListener('click', () => {
+    autoPlayButton.classList.toggle('is-playing');
+    if (autoPlayButton.classList.contains('is-playing')) {
+        autoPlayButton.textContent = 'Stop Playing'
+    } else {
+        autoPlayButton.textContent = 'Autoplay'
+    }
+    autoPlay()
+})
+
+
+
+
 
 function runGame(myChoice) {
     result.innerHTML = "Result:";
@@ -70,6 +78,7 @@ function resetScore() {
     result.textContent = "Result:"
     choicesDisplay.textContent = "? vs ?";
     localStorage.removeItem('score');
+    console.log(localStorage.getItem('score'))
 }
 
 function updateScore() {
@@ -78,7 +87,16 @@ function updateScore() {
     tieDisplay.textContent = `Ties: ${score.ties}`
 }
 
+function autoPlay() {
 
-body.addEventListener('keydown', (event) => {
-    keydownActions[event.key]()
-});
+    if (autoPlayButton.classList.contains('is-playing')) {
+        interval = setInterval(() => {
+            const autoSelection = choices[Math.floor(Math.random() * choices.length)];
+            runGame(autoSelection);
+        }, 1000)
+    } else {
+        clearInterval(interval);
+    }
+
+}
+
