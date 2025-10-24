@@ -1,3 +1,7 @@
+// import {cart} from '../data/cart.js';
+import {cart, addToCart} from '../data/cart.js';
+import {products} from '../data/products.js';
+
 const productsGrid = document.querySelector(".js-products-grid");
 const body = document.querySelector("body");
 let productsHTML = '';	
@@ -59,8 +63,10 @@ products.forEach((product) => {
         </div>    
     `;
 });
-// Replace placeholder with full HTML string
 productsGrid.innerHTML = productsHTML;
+
+
+
 
 // Listener for add to cart Buttons
 productsGrid.addEventListener("click", (event) => {
@@ -71,34 +77,22 @@ productsGrid.addEventListener("click", (event) => {
 		const productContainer = button.closest('.product-container')
 		const quantity = Number(productContainer.querySelector('select').value);
 		const productId = button.dataset.productId;
-		const productName = button.dataset.productName;
-		const matchingItem = cart.find(item => item.productId === productId)
-		clearTimeout(button.dataset.timeoutId);
 
-		if (matchingItem) {
-			matchingItem.quantity += quantity;
-		} else {
-			cart.push({
-				productId: productId,
-				quantity: quantity,
-				name: productName
-			});
-		}
-		updateCartQuantity();
-		const productAddedCheck = productContainer.querySelector('.js-added-to-cart')
+		addToCart(productId, quantity)
+		
+		updateCartDisplayQuantity();
 
-		productAddedCheck.classList.add('visible');
-		const timeoutId = setTimeout(() => {
-			productAddedCheck.classList.remove('visible');
-		}, 2000)
-		button.dataset.timeoutId = timeoutId;
+		const notificationDisplay = productContainer.querySelector('.js-added-to-cart')
+		notifyAddedProduct(button, notificationDisplay);
+
+
     }
 });
 
 
 // Function to update cart total number display
 const cartQuantityDisplay = document.querySelector('.js-cart-quantity');
-function updateCartQuantity() {
+function updateCartDisplayQuantity() {
 	let total = 0;
 	cart.forEach((product) => {
 		total += product.quantity;
@@ -107,12 +101,20 @@ function updateCartQuantity() {
 }
 
 
+// Show 'product added' notification
+function notifyAddedProduct(button, notificationDisplay) {
+	clearTimeout(button.dataset.timeoutId);
+	notificationDisplay.classList.add('visible');
+	const timeoutId = setTimeout(() => {
+		notificationDisplay.classList.remove('visible');
+	}, 2000)
+	button.dataset.timeoutId = timeoutId;
+}
 
 
 
 
-
-// Log the cart with 'q'
+// Log the cart with 'q' keydown
 document.addEventListener('keydown', (event) => {
 	if (event.key === 'q') {
 		console.log('#########################')
@@ -125,4 +127,3 @@ document.addEventListener('keydown', (event) => {
 
 	}
 })
-
