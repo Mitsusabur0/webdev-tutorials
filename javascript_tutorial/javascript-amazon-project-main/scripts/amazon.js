@@ -1,4 +1,4 @@
-const productsGrid = document.querySelector(".products-grid");
+const productsGrid = document.querySelector(".js-products-grid");
 const body = document.querySelector("body");
 let productsHTML = '';	
 
@@ -45,7 +45,7 @@ products.forEach((product) => {
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart js-added-to-cart">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -59,17 +59,21 @@ products.forEach((product) => {
         </div>    
     `;
 });
+// Replace placeholder with full HTML string
 productsGrid.innerHTML = productsHTML;
 
+// Listener for add to cart Buttons
 productsGrid.addEventListener("click", (event) => {
 	const button = event.target.closest('.js-add-to-cart');
 
     if (button) {
+		
 		const productContainer = button.closest('.product-container')
 		const quantity = Number(productContainer.querySelector('select').value);
 		const productId = button.dataset.productId;
 		const productName = button.dataset.productName;
 		const matchingItem = cart.find(item => item.productId === productId)
+		clearTimeout(button.dataset.timeoutId);
 
 		if (matchingItem) {
 			matchingItem.quantity += quantity;
@@ -80,10 +84,35 @@ productsGrid.addEventListener("click", (event) => {
 				name: productName
 			});
 		}
+		updateCartQuantity();
+		const productAddedCheck = productContainer.querySelector('.js-added-to-cart')
+
+		productAddedCheck.classList.add('visible');
+		const timeoutId = setTimeout(() => {
+			productAddedCheck.classList.remove('visible');
+		}, 2000)
+		button.dataset.timeoutId = timeoutId;
     }
 });
 
 
+// Function to update cart total number display
+const cartQuantityDisplay = document.querySelector('.js-cart-quantity');
+function updateCartQuantity() {
+	let total = 0;
+	cart.forEach((product) => {
+		total += product.quantity;
+	})
+	cartQuantityDisplay.textContent = total;
+}
+
+
+
+
+
+
+
+// Log the cart with 'q'
 document.addEventListener('keydown', (event) => {
 	if (event.key === 'q') {
 		console.log('#########################')
@@ -96,3 +125,4 @@ document.addEventListener('keydown', (event) => {
 
 	}
 })
+
