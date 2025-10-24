@@ -67,7 +67,6 @@ productsGrid.innerHTML = productsHTML;
 
 
 
-
 // Listener for add to cart Buttons
 productsGrid.addEventListener("click", (event) => {
 	const button = event.target.closest('.js-add-to-cart');
@@ -110,8 +109,6 @@ function notifyAddedProduct(button, notificationDisplay) {
 	}, 2000)
 	button.dataset.timeoutId = timeoutId;
 }
-
-
 
 
 // Log the cart with 'q' keydown
