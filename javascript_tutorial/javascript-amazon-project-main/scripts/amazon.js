@@ -1,9 +1,11 @@
-const productsGrid = document.querySelector('.products-grid');
+const productsGrid = document.querySelector(".products-grid");
+const body = document.querySelector("body");
+let productsHTML = '';	
 
+// Create the HTML string with all products
 products.forEach((product) => {
-    const newProduct = document.createElement('div');
 
-    newProduct.innerHTML = `
+      productsHTML += `
         <div class="product-container">
           <div class="product-image-container">
             <img class="product-image"
@@ -16,14 +18,14 @@ products.forEach((product) => {
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${product.rating.stars*10}.png">
+              src="images/ratings/rating-${product.rating.stars * 10}.png">
             <div class="product-rating-count link-primary">
               ${product.rating.count}
             </div>
           </div>
 
           <div class="product-price">
-            $${(product.priceCents/100).toFixed(2)}
+            $${(product.priceCents / 100).toFixed(2)}
           </div>
 
           <div class="product-quantity-container">
@@ -48,22 +50,49 @@ products.forEach((product) => {
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary js-add-to-cart">
-            Add to Cart
-          </button>
+		  <button 
+		  	class='add-to-cart-button button-primary js-add-to-cart'
+			data-product-id='${product.id}'
+		  >
+		  	Add to Cart
+		  </button>
         </div>    
-    `
-    productsGrid.append(newProduct);
+    `;
+});
+productsGrid.innerHTML = productsHTML;
+
+productsGrid.addEventListener("click", (event) => {
+	const button = event.target.closest('.js-add-to-cart');
+
+    if (button) {
+		const productContainer = button.closest('.product-container')
+		const quantity = Number(productContainer.querySelector('select').value);
+		const productId = button.dataset.productId;
+		const productName = button.dataset.productName;
+		const matchingItem = cart.find(item => item.productId === productId)
+
+		if (matchingItem) {
+			matchingItem.quantity += quantity;
+		} else {
+			cart.push({
+				productId: productId,
+				quantity: quantity,
+				name: productName
+			});
+		}
+    }
+});
+
+
+document.addEventListener('keydown', (event) => {
+	if (event.key === 'q') {
+		console.log('#########################')
+		cart.forEach((item, index) => {
+			console.log(index+1)
+			console.log(`Product ID: ${item.productId.slice(0,8)}`);
+			console.log(`Quantity: ${item.quantity}`);
+		})
+		console.log('#########################')
+
+	}
 })
-
-const addToCartButtons = document.querySelectorAll('.js-add-to-cart');
-
-addToCartButton.forEach((button) => {
-  button.addEventListener('click', () => {
-    addToCart();
-  })
-})
-
-function addToCart() {
-  console.log('product added');
-}
