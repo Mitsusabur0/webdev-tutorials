@@ -3,6 +3,7 @@ import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 
 let cartSummaryHtml = '';
+let totalProducts = 0;
 cart.forEach((cartItem) => {
     const item = products.find((product) => product.id === cartItem.id);
     cartSummaryHtml += `
@@ -28,11 +29,13 @@ cart.forEach((cartItem) => {
                             cartItem.quantity
                         }</span>
                         </span>
-                        <span class="update-quantity-link link-primary">
-                        Update
+                        <span class="update-quantity-link link-primary js-update-link"
+                        data-product-id='${item.id}'>
+                            Update
                         </span>
-                        <span class="delete-quantity-link link-primary">
-                        Delete
+                        <span class="delete-quantity-link link-primary js-delete-link"
+                        data-product-id='${item.id}'>
+                            Delete
                         </span>
                     </div>
                 </div>
@@ -84,6 +87,17 @@ cart.forEach((cartItem) => {
             </div>
         </div>
     `;
+    totalProducts += cartItem.quantity;
 });
-
+document.querySelector('.js-product-total').textContent = `${totalProducts} items`;
 document.querySelector(".js-order-summary").innerHTML = cartSummaryHtml;
+
+
+// const updateLink = document.querySelector('.js-update-link');
+// const deleteLink = document.querySelectorAll('.js-delete-link');
+
+document.querySelector('.js-order-summary').addEventListener('click', (event) => {
+    const button = event.target.closest('.js-delete-link' || '.js-update-link');
+    console.log(button)
+
+});
