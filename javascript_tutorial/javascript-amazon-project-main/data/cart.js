@@ -13,7 +13,7 @@ if (!cart) {
 };
 
 export function addToCart(productId, quantity) {
-	const matchingItem = cart.find(item => item.productId === productId)
+	const matchingItem = cart.find(item => item.id === productId)
 	if (matchingItem) {
 		matchingItem.quantity += quantity;
 	} else {

@@ -74,16 +74,16 @@ productsGrid.addEventListener("click", (event) => {
 
     if (button) {
 		
-		const productContainer = button.closest('.product-container')
-		const quantity = Number(productContainer.querySelector('select').value);
-		const productId = button.dataset.productId;
+      const productContainer = button.closest('.product-container')
+      const quantity = Number(productContainer.querySelector('select').value);
+      const productId = button.dataset.productId;
 
-		addToCart(productId, quantity)
-		
-		updateCartDisplayQuantity();
+      addToCart(productId, quantity)
+      
+      updateCartDisplayQuantity();
 
-		const notificationDisplay = productContainer.querySelector('.js-added-to-cart')
-		notifyAddedProduct(button, notificationDisplay);
+      const notificationDisplay = productContainer.querySelector('.js-added-to-cart')
+      notifyAddedProduct(button, notificationDisplay);
 
 
     }

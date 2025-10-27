@@ -121,4 +121,5 @@ document.querySelector('.js-order-summary').addEventListener('click', (event) =>
 
 document.querySelector('.js-clear-cart').addEventListener('click', () => {
     clearCart();
+    renderCart();
 })
