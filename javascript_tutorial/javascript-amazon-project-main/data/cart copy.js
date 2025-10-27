@@ -1,3 +1,4 @@
+
 export const cart = [
     {
         id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
@@ -9,6 +10,7 @@ export const cart = [
     },
 ]
 
+// Add products to cart
 export function addToCart(productId, quantity) {
 	const matchingItem = cart.find(item => item.productId === productId)
 	if (matchingItem) {
@@ -21,16 +23,5 @@ export function addToCart(productId, quantity) {
 	}
 }
 
-export function removeFromCart(event) {
-	const toDelete = cart.findIndex(item => item.id === event.target.dataset.productId);
-	if (typeof toDelete === 'number') {
-		cart.splice(toDelete, 1);
-	}
-}
 
-export function updateCart(event) {
-	const itemToUpdate = cart.find(item => item.id === event.target.dataset.productId);
-	if (itemToUpdate) {
-		itemToUpdate.quantity = Number(prompt('New quantity'))
-	}
-}
+
