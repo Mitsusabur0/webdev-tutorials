@@ -1,10 +1,13 @@
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
-import { cart, removeFromCart, updateCart } from "../data/cart.js";
+import { cart, removeFromCart, updateCart, clearCart } from "../data/cart.js";
 
 let cartSummaryHtml = '';
 let totalProducts = 0;
 
+
+
+console.log(cart);
 renderCart();
 
 
@@ -13,6 +16,7 @@ export function renderCart() {
     totalProducts = 0;
     cart.forEach((cartItem) => {
         const item = products.find((product) => product.id === cartItem.id);
+        console.log(item);
         cartSummaryHtml += `
             <div class="cart-item-container">
                 <div class="delivery-date">
@@ -115,3 +119,6 @@ document.querySelector('.js-order-summary').addEventListener('click', (event) =>
     }
 });
 
+document.querySelector('.js-clear-cart').addEventListener('click', () => {
+    clearCart();
+})
