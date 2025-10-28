@@ -68,6 +68,7 @@ productsGrid.innerHTML = productsHTML;
 
 
 
+
 // Listener for add to cart Buttons
 productsGrid.addEventListener("click", (event) => {
 	const button = event.target.closest('.js-add-to-cart');
@@ -92,6 +93,7 @@ productsGrid.addEventListener("click", (event) => {
 
 // Function to update cart total number display
 const cartQuantityDisplay = document.querySelector('.js-cart-quantity');
+updateCartDisplayQuantity()
 function updateCartDisplayQuantity() {
 	let total = 0;
 	cart.forEach((product) => {

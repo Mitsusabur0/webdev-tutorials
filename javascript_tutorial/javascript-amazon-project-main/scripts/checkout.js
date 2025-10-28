@@ -1,22 +1,20 @@
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 import { cart, removeFromCart, updateCart, clearCart } from "../data/cart.js";
+import { getShippingDate } from "./utils/dates.js";
 
 let cartSummaryHtml = '';
 let totalProducts = 0;
 
 
 
-console.log(cart);
+
 renderCart();
-
-
 export function renderCart() {
     cartSummaryHtml = '';
     totalProducts = 0;
     cart.forEach((cartItem) => {
         const item = products.find((product) => product.id === cartItem.id);
-        console.log(item);
         cartSummaryHtml += `
             <div class="cart-item-container">
                 <div class="delivery-date">
@@ -61,7 +59,7 @@ export function renderCart() {
                             name="delivery-option-${item.id}">
                             <div>
                                 <div class="delivery-option-date">
-                                    Tuesday, June 21
+                                    ${getShippingDate(7)}
                                 </div>
                                 <div class="delivery-option-price">
                                     FREE Shipping
@@ -104,8 +102,8 @@ export function renderCart() {
     document.querySelector(".js-order-summary").innerHTML = cartSummaryHtml;
 
     // For development, delete later
-    console.log('Cart after render:');
-    console.log(cart);
+    // console.log('Cart after render:');
+    // console.log(cart);
 }
 
 // Listener for update and delete links
@@ -122,4 +120,4 @@ document.querySelector('.js-order-summary').addEventListener('click', (event) =>
 document.querySelector('.js-clear-cart').addEventListener('click', () => {
     clearCart();
     renderCart();
-})
+});
