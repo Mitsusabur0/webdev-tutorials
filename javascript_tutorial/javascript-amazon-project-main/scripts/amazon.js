@@ -120,7 +120,7 @@ document.addEventListener('keydown', (event) => {
 		console.log('#########################')
 		cart.forEach((item, index) => {
 			console.log(index+1)
-			console.log(`Product ID: ${item.productId.slice(0,8)}`);
+			console.log(`Product ID: ${item.id.slice(0,8)}...`);
 			console.log(`Quantity: ${item.quantity}`);
 		})
 		console.log('#########################')
