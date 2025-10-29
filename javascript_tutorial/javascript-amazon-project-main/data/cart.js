@@ -47,6 +47,7 @@ export function updateCart(event) {
 }
 
 export function clearCart() {
+	localStorage.clear();
 	cart = [];
 	saveCartStorage();
 }

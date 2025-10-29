@@ -4,14 +4,10 @@ import { cart, removeFromCart, updateCart, clearCart, saveCartStorage } from "..
 import { getShippingDate } from "../utils/dates.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
-import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
-
-let cartSummaryHtml = '';
-let totalProducts = 0;
 
 export function renderCart() {
-    cartSummaryHtml = '';
-    totalProducts = 0;
+    let cartSummaryHtml = '';
+    let totalProducts = 0;
     cart.forEach((cartItem) => {
         const item = getProduct(cartItem.id);
         cartSummaryHtml += `
