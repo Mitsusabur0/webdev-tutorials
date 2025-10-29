@@ -8,11 +8,8 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 let cartSummaryHtml = '';
 let totalProducts = 0;
 
-
-
-console.log(cart);
-
 renderCart();
+
 export function renderCart() {
     cartSummaryHtml = '';
     totalProducts = 0;
@@ -76,13 +73,7 @@ function deliveryOptionsHTML(item, cartItem) {
         const priceString = deliveryOption.priceCents === 0
             ? 'FREE Shipping'
             : `${formatCurrency(deliveryOption.priceCents)} - Shipping`;
-
         const isChecked = Number(deliveryOption.id) === cartItem.deliveryOptionId;
-        
-        if (isChecked) {
-
-        }
-
 
         html +=
         `
@@ -110,18 +101,7 @@ function deliveryOptionsHTML(item, cartItem) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-// Listener for update and delete links
+// Event Listener for update and delete links
 document.querySelector('.js-order-summary').addEventListener('click', (event) => {
     if (event.target.closest('.js-delete-link')) {
         removeFromCart(event);
@@ -132,11 +112,6 @@ document.querySelector('.js-order-summary').addEventListener('click', (event) =>
     }
 });
 
-document.querySelector('.js-clear-cart').addEventListener('click', () => {
-    clearCart();
-    renderCart();
-});
-
 
 // Event listener to change delivery option values
 document.querySelector('.js-order-summary').addEventListener('click', (event) => {
@@ -144,12 +119,16 @@ document.querySelector('.js-order-summary').addEventListener('click', (event) =>
 
     if (selectedOption) {
         const item = cart.find(cartItem => cartItem.id === selectedOption.dataset.productId)
-        console.log('item:', item)
 
         item.deliveryOptionId = Number(selectedOption.value);
-        console.log(item.deliveryOptionId);
-        event.target.closest('.cart-item-container').querySelector('.delivery-date')
-            .innerHTML = `Delivery date: ${getShippingDate(Number(selectedOption.value))}`;
         saveCartStorage();
+        renderCart();
     }
 })
+
+
+// DEV helper function to clear cart
+document.querySelector('.js-clear-cart').addEventListener('click', () => {
+    clearCart();
+    renderCart();
+});
