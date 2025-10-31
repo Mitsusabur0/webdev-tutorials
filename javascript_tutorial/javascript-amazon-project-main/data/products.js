@@ -35,7 +35,6 @@ class Product {
     }
 }
 
-
 class Clothing extends Product {
 	sizeChartLink;
 	
@@ -52,6 +51,8 @@ class Clothing extends Product {
         `;
     }
 }
+
+
 
 
 
