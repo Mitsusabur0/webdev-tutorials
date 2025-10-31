@@ -1,11 +1,11 @@
-import { cart, addToCart } from '../data/cart.js';
+// import { cart, addToCart } from '../data/cart.js';
+import { cart } from '../data/cart-class.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
 const productsGrid = document.querySelector(".js-products-grid");
 const body = document.querySelector("body");
 let productsHTML = '';	
-
 
 // Create the HTML string with all products
 products.forEach((product) => {
@@ -23,14 +23,14 @@ products.forEach((product) => {
 
           <div class="product-rating-container">
             <img class="product-rating-stars"
-              src="images/ratings/rating-${product.rating.stars * 10}.png">
+              src='${product.getStarsUrl()}'>
             <div class="product-rating-count link-primary">
               ${product.rating.count}
             </div>
           </div>
 
           <div class="product-price">
-            $${formatCurrency(product.priceCents)}
+            $${product.getPrice()}
           </div>
 
           <div class="product-quantity-container">
@@ -79,7 +79,7 @@ productsGrid.addEventListener("click", (event) => {
       const quantity = Number(productContainer.querySelector('select').value);
       const productId = button.dataset.productId;
 
-      addToCart(productId, quantity)
+      cart.addToCart(productId, quantity)
       
       updateCartDisplayQuantity();
 
@@ -96,7 +96,7 @@ const cartQuantityDisplay = document.querySelector('.js-cart-quantity');
 updateCartDisplayQuantity()
 function updateCartDisplayQuantity() {
 	let total = 0;
-	cart.forEach((product) => {
+	cart.cartItems.forEach((product) => {
 		total += product.quantity;
 	})
 	cartQuantityDisplay.textContent = total;
@@ -118,7 +118,7 @@ function notifyAddedProduct(button, notificationDisplay) {
 document.addEventListener('keydown', (event) => {
 	if (event.key === 'q') {
 		console.log('#########################')
-		cart.forEach((item, index) => {
+		cart.cartItems.forEach((item, index) => {
 			console.log(index+1)
 			console.log(`Product ID: ${item.id.slice(0,8)}...`);
 			console.log(`Quantity: ${item.quantity}`);

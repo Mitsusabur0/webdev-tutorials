@@ -1,14 +1,17 @@
 import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
-import { cart, removeFromCart, updateCart, clearCart, saveCartStorage } from "../../data/cart.js";
+// import { cart, removeFromCart, updateCart, clearCart, saveCartStorage } from "../../data/cart.js";
+import { cart } from "../../data/cart-class.js";
 import { getShippingDate } from "../utils/dates.js";
 import { deliveryOptions } from "../../data/deliveryOptions.js";
 import { renderPaymentSummary } from "./paymentSummary.js";
 
+
 export function renderCart() {
     let cartSummaryHtml = '';
     let totalProducts = 0;
-    cart.forEach((cartItem) => {
+    // console.log(cart);
+    cart.cartItems.forEach((cartItem) => {
         const item = getProduct(cartItem.id);
         cartSummaryHtml += `
             <div class="cart-item-container">
@@ -25,7 +28,7 @@ export function renderCart() {
                             ${item.name}
                         </div>
                         <div class="product-price">
-                            $${formatCurrency(item.priceCents)}
+                            $${(item.getPrice()*cartItem.quantity).toFixed(2)}
                         </div>
                         <div class="product-quantity">
                             <span>
@@ -95,11 +98,11 @@ function deliveryOptionsHTML(item, cartItem) {
 // Event Listener for update and delete links
 document.querySelector('.js-order-summary').addEventListener('click', (event) => {
     if (event.target.closest('.js-delete-link')) {
-        removeFromCart(event);
+        cart.removeFromCart(event);
         renderCart();
         renderPaymentSummary();
     } else if (event.target.closest('.js-update-link')) {
-        updateCart(event);
+        cart.updateCart(event);
         renderCart();
         renderPaymentSummary();
     }
@@ -111,9 +114,10 @@ document.querySelector('.js-order-summary').addEventListener('click', (event) =>
     const selectedOption = event.target.closest('.delivery-option-input');
 
     if (selectedOption) {
-        const item = cart.find(cartItem => cartItem.id === selectedOption.dataset.productId)
+        const item = cart.cartItems.find(cartItem => cartItem.id === selectedOption.dataset.productId)
         item.deliveryOptionId = Number(selectedOption.value);
-        saveCartStorage();
+        console.log('item:', item);
+        cart.saveCartStorage();
         renderCart();
         renderPaymentSummary();
     }
@@ -122,6 +126,6 @@ document.querySelector('.js-order-summary').addEventListener('click', (event) =>
 
 // DEV helper function to clear cart
 document.querySelector('.js-clear-cart').addEventListener('click', () => {
-    clearCart();
+    cart.clearCart();
     renderCart();
 });

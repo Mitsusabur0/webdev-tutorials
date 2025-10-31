@@ -1,4 +1,4 @@
-class Cart {
+export class Cart {
     // Class Properties
     cartItems;
     // # = private property
@@ -70,11 +70,5 @@ class Cart {
 };
 
 
+export const cart = new Cart('cart');
 
-const cart = new Cart('cart-oop');
-const businessCart = new Cart('cart-business');
-
-
-
-console.log(cart);
-console.log(businessCart);
