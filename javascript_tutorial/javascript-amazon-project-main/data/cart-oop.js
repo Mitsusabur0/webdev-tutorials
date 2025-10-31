@@ -67,12 +67,12 @@ function Cart(localStorageKey) {
 
 
 
-const cart = Cart('cart-oop');
+// const cart = Cart('cart-oop');
 
-const businessCart = Cart('cart-business');
+// const businessCart = Cart('cart-business');
 
-cart.loadFromStorage();
-businessCart.loadFromStorage();
+// cart.loadFromStorage();
+// businessCart.loadFromStorage();
 
-console.log(cart);
-console.log(businessCart);
+// console.log(cart);
+// console.log(businessCart);
