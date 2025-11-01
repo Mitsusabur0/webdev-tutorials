@@ -1,18 +1,11 @@
 const xhr = new XMLHttpRequest();
-let response;
+export let response;
 
 xhr.addEventListener('load', () => {
     response = xhr.response;
-    console.log(response);
-
-    
-
-
-
-
 });
 
-xhr.open('GET', "https://supersimplebackend.dev/images/apple.jpg");
+xhr.open('GET', "https://supersimplebackend.dev/products");
 
 xhr.send();
 

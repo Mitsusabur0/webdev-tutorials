@@ -1,4 +1,6 @@
 import { formatCurrency } from "../scripts/utils/money.js";
+import '../data/backend-practice.js';
+import { response } from '../data/backend-practice.js';
 
 export function getProduct(productId) {
     const product = products.find((item) => item.id === productId);
@@ -53,10 +55,33 @@ class Clothing extends Product {
 }
 
 
+export let products = [];
+
+export function loadProducts(fun) {
+    const hxr = new XMLHttpRequest();
+    hxr.addEventListener('load', () => {
+        products = JSON.parse(hxr.response).map((product) => {
+            if (product.type === 'clothing') {
+                return new Clothing(product);
+            } else {
+                return new Product(product);
+            }
+        })
+        console.log('load products');
+        fun();
+
+    })
+
+    hxr.open('GET', 'https://supersimplebackend.dev/products');
+    hxr.send();
+}
 
 
 
-export const products = [
+
+
+
+export const products2 = [
     {
         id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
         image: "images/products/athletic-cotton-socks-6-pairs.jpg",
